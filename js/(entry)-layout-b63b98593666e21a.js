@@ -114,7 +114,7 @@
                     }), (0,
                     n.jsx)("p", {
                         className: "mx-auto hidden text-center text-subtitle-mobile text-dark-background lg:block lg:text-subtitle",
-                        children: "Pikadditions is here: real footage meets unreal creativity. Level up your videos with surprising and fantastical elements."
+                        children: "Dreams are the blueprint action is the architect.."
                     })]
                 })
         }
