@@ -209,6 +209,62 @@
                     </div>
                 </div>
             </div>
+            <!-- AUTH POPUP -->
+<div id="authPopup"
+  class="fixed inset-0 hidden items-center justify-center bg-black/50 backdrop-blur-sm z-[9999]">
+  <div
+    class="bg-white text-gray-800 rounded-2xl shadow-2xl p-6 w-80 text-center animate-fade-in border border-gray-200">
+    <h2 class="text-lg font-bold mb-2">Working on it...</h2>
+    <p id="authMessage" class="text-sm text-gray-600">Once on DEX [AUTH METHOD]</p>
+    <div class="mt-4 flex justify-center">
+      <div class="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  </div>
+</div>
+
+<!-- JS -->
+<script>
+(function () {
+  // Wait until everything is ready
+  window.addEventListener('load', () => {
+    const popup = document.getElementById("authPopup");
+    const msg = document.getElementById("authMessage");
+
+    function showAuthPopup(method) {
+      msg.textContent = `Working on it once on DEX ${method}`;
+      popup.classList.remove("hidden");
+      popup.classList.add("flex");
+      setTimeout(() => {
+        popup.classList.add("hidden");
+        popup.classList.remove("flex");
+      }, 2500);
+    }
+
+    // Find ALL buttons that say “Sign in with …”
+    document.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", e => {
+        const text = btn.innerText.trim();
+        if (text.includes("Sign in with")) {
+          const method = text.replace("Sign in with", "").trim();
+          showAuthPopup(`[${method}]`);
+        } else if (text.toLowerCase().includes("email")) {
+          showAuthPopup("[Email]");
+        }
+      });
+    });
+  });
+})();
+</script>
+
+<!-- CSS animation -->
+<style>
+@keyframes fade-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-fade-in { animation: fade-in 0.2s ease-out; }
+</style>
+
         </main>
         <div id="modal-root"></div>
         <script>
@@ -247,211 +303,6 @@ self.__next_f.push([1, "0:[\"$\",\"$L10\",null,{\"buildId\":\"SZRFvlz2RBxz_UZH4q
         </script>
         <script>
             self.__next_f.push([1, "VFJVGW8G2\"}],[\"$\",\"$L1e\",null,{\"user\":null,\"children\":[\"$\",\"body\",null,{\"className\":\"lg:w-[calc(100%-var(--scrollbar-thickness)] min-h-screen bg-dark-background pt-[var(--navbar-top-mobile)] font-sans text-regular-mobile transition-[padding-top] md:pt-[var(--navbar-top)] lg:text-regular\",\"style\":{},\"children\":[[\"$\",\"$L1f\",null,{\"subscription\":{\"subscription\":null},\"appliedRenewalDiscount\":false,\"isSuperCollaborator\":false,\"children\":[[\"$\",\"$L20\",null,{}],[\"$\",\"$L21\",null,{\"children\":[\"$\",\"main\",null,{\"className\":\"flex items-center\",\"children\":[\"$\",\"$L13\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$22\",\"errorStyles\":[],\"errorScripts\":[],\"template\":[\"$\",\"$L14\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":\"$23\",\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":\"$24\",\"children\":\"404\"}],[\"$\",\"div\",null,{\"style\":\"$25\",\"children\":[\"$\",\"h2\",null,{\"style\":\"$26\",\"children\":\"This page could not be found.\"}]}]]}]}]],\"notFoundStyles\":[]}]}]}],[\"$\",\"div\",null,{\"id\":\"modal-root\"}],[\"$\",\"$L27\",null,{}],[\"$\",\"$L28\",null,{}],[\"$\",\"$L29\",null,{}],[\"$\",\"$L2a\",null,{}],[\"$\",\"$L2b\",null,{}]]}],[\"$\",\"$L2c\",null,{\"src\":\"https://r.wdfl.co/rw.js\",\"data-rewardful\":\"ced8c1\"}],[\"$\",\"$L2c\",null,{\"id\":\"rewardful-queue\",\"strategy\":\"beforeInteractive\",\"children\":\"(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');\"}]]}]}]]}]\n"])
-        </script>
-            <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideUp {
-            from { 
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .modal-overlay {
-            animation: fadeIn 0.2s ease-out;
-        }
-        .modal-content {
-            animation: slideUp 0.3s ease-out;
-        }
-    </style>
-</head>
-<body class="min-h-screen bg-[#0D0D0D] text-white">
-    <main class="flex items-center">
-        <div class="flex w-full flex-1 max-lg:flex-col lg:h-screen">
-            <!-- Left Side -->
-            <div class="hidden basis-7/12 flex-col items-center justify-center gap-8 bg-[#FFE500] px-6 py-14 lg:flex lg:h-full lg:px-14 xl:px-16">
-                <div class="flex flex-1 flex-col"></div>
-                <div class="flex w-full flex-1 flex-col items-center justify-center gap-8">
-                    <a href="home.html">
-                        <svg width="160" height="30" viewBox="0 0 160 30" fill="none">
-                            <text x="0" y="22" font-family="Arial, sans-serif" font-size="24" fill="#0D0D0D">Replay Token</text>
-                        </svg>
-                    </a>
-                    <div class="relative">
-                        <video class="h-auto max-h-[360px] w-auto rounded-[10px] object-cover" autoplay loop muted playsinline>
-                            <source src="images/video.gif" type="video/mp4">
-                        </video>
-                        <button class="rounded-md flex items-center justify-center px-1.5 gap-1.5 py-1.5 absolute bottom-2 right-2 hover:bg-gray-700 text-white bg-gray-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" class="h-4">
-                                <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.85" stroke-width="1.5" d="m14.667 6-4 4m0-4 4 4M7.333 3.333 4 6H1.333v4H4l3.333 2.667V3.333Z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <p class="mx-auto hidden text-center text-lg text-[#0D0D0D] lg:block">"Dreams are the blueprint action to have to replay them."</p>
-                </div>
-                <div class="flex flex-1 flex-col justify-end">
-                    <p class="mt-auto text-sm text-[#0D0D0D] lg:mx-auto lg:text-center">
-                        This is a memecoin, done and launched on pumpfun, no insider beside you!
-                        <a class="underline" target="_blank" rel="noopener noreferrer" href="about.html">about page</a>.<br>
-                        <a class="underline" target="_blank" rel="noopener noreferrer" href="x.com">LIVE</a>
-                    </p>
-                </div>
-            </div>
-
-            <!-- Right Side -->
-            <div class="flex flex-1 flex-col items-center justify-start py-6 max-lg:justify-center max-lg:px-4 lg:px-14 lg:py-8 xl:px-20">
-                <div class="flex flex-1 flex-col"></div>
-                <div class="flex w-full flex-1 flex-col justify-center max-lg:py-16 lg:items-start">
-                    <div class="flex w-full max-w-xs flex-1 flex-col justify-center gap-7 max-lg:mx-auto">
-                        <div class="flex w-full flex-1 flex-col justify-center gap-7">
-                            <div class="flex flex-col gap-2.5">
-                                <div class="-mt-10 flex flex-col gap-2.5 lg:mt-0">
-                                    <h1 class="text-4xl font-black uppercase text-[#FFE500] lg:text-5xl">Replay Token W PUMPFUN modal</h1>
-                                    <p class="text-lg text-gray-300 lg:hidden">New model alert! Check out Pika 2.1 and create your weirdest, wildest dreams in stunning 1080p.</p>
-                                    <div class="mb-7 mt-4 flex w-full flex-1 flex-col items-center justify-center gap-8 lg:hidden">
-                                        <div class="relative">
-                                            <video class="h-auto max-h-[360px] w-auto rounded-[10px] object-cover" autoplay loop muted playsinline>
-                                                <source src="images/video.gif" type="video/mp4">
-                                            </video>
-                                        </div>
-                                    </div>
-                                    <p class="text-lg">Sign in </p>
-                                </div>
-                            </div>
-                            <div class="flex flex-col gap-5">
-                                <button onclick="openModal('Google')" class="rounded-md flex items-center justify-center px-4 gap-2 py-2.5 !bg-white hover:!bg-gray-100 text-[#0D0D0D]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                        <path d="M18.1711 8.36775H17.4998V8.33317H9.99984V11.6665H14.7094C14.0223 13.6069 12.1761 14.9998 9.99984 14.9998C7.23859 14.9998 4.99984 12.7611 4.99984 9.99984C4.99984 7.23859 7.23859 4.99984 9.99984 4.99984C11.2744 4.99984 12.434 5.48067 13.3169 6.26609L15.674 3.909C14.1857 2.52192 12.1948 1.6665 9.99984 1.6665C5.39775 1.6665 1.6665 5.39775 1.6665 9.99984C1.6665 14.6019 5.39775 18.3332 9.99984 18.3332C14.6019 18.3332 18.3332 14.6019 18.3332 9.99984C18.3332 9.44109 18.2757 8.89567 18.1711 8.36775Z" fill="#FFC107"></path>
-                                        <path d="M2.62744 6.12109L5.36536 8.129C6.10619 6.29484 7.90036 4.99984 9.99994 4.99984C11.2745 4.99984 12.4341 5.48067 13.317 6.26609L15.6741 3.909C14.1858 2.52192 12.1949 1.6665 9.99994 1.6665C6.79911 1.6665 4.02327 3.47359 2.62744 6.12109Z" fill="#FF3D00"></path>
-                                        <path d="M9.9998 18.3331C12.1523 18.3331 14.1081 17.5094 15.5869 16.1698L13.0077 13.9873C12.1429 14.645 11.0862 15.0007 9.9998 14.9998C7.8323 14.9998 5.99189 13.6177 5.29855 11.689L2.58105 13.7827C3.96022 16.4815 6.76105 18.3331 9.9998 18.3331Z" fill="#4CAF50"></path>
-                                        <path d="M18.1712 8.36808H17.5V8.3335H10V11.6668H14.7096C14.3809 12.5903 13.7889 13.3973 13.0067 13.9881L13.0079 13.9872L15.5871 16.1697C15.4046 16.3356 18.3333 14.1668 18.3333 10.0002C18.3333 9.44141 18.2758 8.896 18.1712 8.36808Z" fill="#1976D2"></path>
-                                    </svg>
-                                    <span class="font-bold">Sign in with Google</span>
-                                </button>
-                                <button onclick="openModal('Facebook')" class="rounded-md flex items-center justify-center px-4 gap-2 py-2.5 !bg-white hover:!bg-gray-100 text-[#0D0D0D]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="#4267B2">
-                                        <path d="M11.6668 11.25H13.7502L14.5835 7.91667H11.6668V6.25C11.6668 5.39167 11.6668 4.58334 13.3335 4.58334H14.5835V1.78334C14.3118 1.74751 13.286 1.66667 12.2027 1.66667C9.94016 1.66667 8.3335 3.0475 8.3335 5.58334V7.91667H5.8335V11.25H8.3335V18.3333H11.6668V11.25Z"></path>
-                                    </svg>
-                                    <span class="font-bold">Sign in with Facebook</span>
-                                </button>
-                                <button onclick="openModal('Discord')" class="rounded-md flex items-center justify-center px-4 gap-2 py-2.5 !bg-white hover:!bg-gray-100 text-[#0D0D0D]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="#5865F2">
-                                        <path d="M12.55 3C12.3716 3.32065 12.2125 3.65179 12.0738 3.99163C10.7107 3.77532 9.3221 3.77532 7.95895 3.99163C7.82022 3.65179 7.66121 3.32065 7.48277 3C6.19871 3.22014 4.95043 3.61439 3.7722 4.17192C1.6653 7.2228 0.709802 10.9267 1.07687 14.6201C2.44991 15.6558 3.99094 16.4457 5.63198 16.9549C6.00566 16.4597 6.33915 15.9351 6.62925 15.3863C6.09385 15.1883 5.57924 14.9377 5.09291 14.6381C5.2263 14.5491 5.35247 14.4496 5.47026 14.3406C6.88842 15.026 8.44228 15.382 10.0164 15.382C11.5905 15.382 13.1444 15.026 14.5625 14.3406C14.6883 14.4488 14.8141 14.548 14.9399 14.6381C14.4509 14.9353 13.9368 15.1887 13.4035 15.3954C13.6816 15.9566 14.0062 16.4933 14.3738 17C16.0128 16.4925 17.5512 15.7024 18.92 14.6652C19.2958 10.9711 18.3396 7.26417 16.2246 4.217C15.0596 3.64793 13.8237 3.2386 12.55 3ZM7.03355 12.5106C6.58396 12.4782 6.16435 12.2723 5.86281 11.9362C5.56127 11.6 5.40126 11.1597 5.41635 10.7077C5.39898 10.255 5.55821 9.81347 5.8602 9.47679C6.16219 9.14011 6.58313 8.93488 7.03355 8.9047C7.48398 8.93488 7.90492 9.14011 8.20691 9.47679C8.5089 9.81347 8.66813 10.255 8.65075 10.7077C8.66813 11.1603 8.5089 11.6019 8.20691 11.9385C7.90492 12.2752 7.48398 12.4805 7.03355 12.5106ZM12.9992 12.5106C12.5496 12.4782 12.13 12.2723 11.8285 11.9362C11.5269 11.6 11.3669 11.1597 11.382 10.7077C11.3646 10.255 11.5239 9.81347 11.8259 9.47679C12.1279 9.14011 12.5488 8.93488 12.9992 8.9047C13.4505 8.93262 13.8728 9.13719 14.1752 9.47439C14.4777 9.81158 14.6361 10.2544 14.6164 10.7077C14.6361 11.1609 14.4777 11.6037 14.1752 11.9409C13.8728 12.2781 13.4505 12.4827 12.9992 12.5106Z"></path>
-                                    </svg>
-                                    <span class="font-bold">Sign in with Discord</span>
-                                </button>
-                                <div class="flex items-center gap-5 text-sm">
-                                    <div class="h-0 flex-1 border border-dashed opacity-[0.15]"></div>
-                                    or
-                                    <div class="h-0 flex-1 border border-dashed opacity-[0.15]"></div>
-                                </div>
-                                <button onclick="openModal('Email')" class="rounded-md flex items-center justify-center px-4 gap-2 py-2.5 hover:bg-[#FFE500] text-[#0D0D0D] bg-[#FFE500]">
-                                    <svg width="20" height="16" viewBox="0 0 20 16" fill="none">
-                                        <path d="M18.3333 3.83398L10.8583 8.58398C10.6011 8.74517 10.3036 8.83066 10 8.83066C9.6964 8.83066 9.39894 8.74517 9.14167 8.58398L1.66667 3.83398M3.33333 1.33398H16.6667C17.5871 1.33398 18.3333 2.08018 18.3333 3.00065V13.0007C18.3333 13.9211 17.5871 14.6673 16.6667 14.6673H3.33333C2.41286 14.6673 1.66667 13.9211 1.66667 13.0007V3.00065C1.66667 2.08018 2.41286 1.33398 3.33333 1.33398Z" stroke="#0D0D0D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                    <span class="font-bold">Sign in with an email</span>
-                                </button>
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-400">
-                            By signing in, you are agreeing to the
-                            <a target="_blank" rel="noopener noreferrer" class="underline" href="terms-of-service.html">Terms of Service</a>,
-                            <a target="_blank" rel="noopener noreferrer" class="underline" href="acceptable-use-policy.html">Acceptable Use Policy</a>, and
-                            <a target="_blank" rel="noopener noreferrer" class="underline" href="privacy-policy.html">Privacy Policy</a>
-                        </p>
-                        <div class="flex items-center justify-center gap-6 text-base font-light">
-                            <a target="_blank" rel="noopener noreferrer" href="https://x.com/EverLearnCoin">Twitter</a>
-                            <a target="_blank" rel="noopener noreferrer" href="https://t.me/everlearncoin">Pumpfun</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Modal -->
-    <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 modal-overlay">
-        <div class="bg-[#1a1a1a] rounded-xl p-8 max-w-md w-full mx-4 modal-content border border-gray-700">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-[#FFE500]" id="modalTitle">Sign in with Google</h2>
-                <button onclick="closeModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
-            </div>
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium mb-2">Username / Email</label>
-                    <input type="text" id="username" class="w-full px-4 py-2 bg-[#0D0D0D] border border-gray-700 rounded-lg focus:outline-none focus:border-[#FFE500] text-white" placeholder="Enter your email">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-2">Password</label>
-                    <input type="password" id="password" class="w-full px-4 py-2 bg-[#0D0D0D] border border-gray-700 rounded-lg focus:outline-none focus:border-[#FFE500] text-white" placeholder="Enter your password">
-                </div>
-                <button onclick="handleLogin()" class="w-full bg-[#FFE500] hover:bg-[#FFD700] text-[#0D0D0D] font-bold py-3 rounded-lg transition duration-200">
-                    Sign In
-                </button>
-                <div class="text-center text-sm text-gray-400">
-                    <a href="#" class="hover:text-[#FFE500]">Forgot password?</a>
-                </div>
-            </div>
-            <div id="successMessage" class="hidden mt-4 p-3 bg-green-600 rounded-lg text-center">
-                ✓ Login successful! Redirecting...
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let currentProvider = '';
-
-        function openModal(provider) {
-            currentProvider = provider;
-            document.getElementById('modalTitle').textContent = `Sign in with ${provider}`;
-            document.getElementById('loginModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            document.getElementById('loginModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-            document.getElementById('successMessage').classList.add('hidden');
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-        }
-
-        function handleLogin() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (username && password) {
-                document.getElementById('successMessage').classList.remove('hidden');
-                setTimeout(() => {
-                    closeModal();
-                    // Redirect to home or dashboard
-                    window.location.href = 'home.html';
-                }, 1500);
-            } else {
-                alert('Please enter both username and password');
-            }
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('loginModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // Allow Enter key to submit
-        document.getElementById('password').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                handleLogin();
-            }
-        });
-    </script>        
+        </script>        
     </body>
 </html>
